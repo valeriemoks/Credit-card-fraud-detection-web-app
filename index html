@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Credit Card Fraud Detection</title>
+    <style>
+        body {
+            background-image: url("https://live.staticflickr.com/65535/52861861489_8a5ebb208b_z.jpg");
+            background-repeat: no-repeat;
+            background-size: cover;
+            background-position: center;
+            color: white; /* set font color to white */
+        }
+
+        h1, h2, label, input, select {
+            color: white; /* set font color to white */
+        }
+
+        /* set font size to larger */
+        h1, h2 {
+            font-size: 2.5em;
+        }
+
+        /* increase input and select size */
+        input[type="text"], select {
+            font-size: 1.2em;
+            padding: 10px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Credit Card Fraud Detection</h1>
+    <form action="{{ url_for('predict') }}" method="post">
+        <label for="distance_from_home">Distance from home:</label>
+        <input type="text" name="distance_from_home" id="distance_from_home"><br><br>
+
+        <label for="distance_from_last_transaction">Distance from last transaction:</label>
+        <input type="text" name="distance_from_last_transaction" id="distance_from_last_transaction"><br><br>
+
+        <label for="ratio_to_median_purchase_price">Ratio to median purchase price:</label>
+        <input type="text" name="ratio_to_median_purchase_price" id="ratio_to_median_purchase_price"><br><br>
+
+        <label for="repeat_retailer">Repeat retailer:</label>
+        <select name="repeat_retailer" id="repeat_retailer">
+            <option value="0">No</option>
+            <option value="1">Yes</option>
+        </select><br><br>
+
+        <label for="used_chip">Used chip:</label>
+        <select name="used_chip" id="used_chip">
+            <option value="0">No</option>
+            <option value="1">Yes</option>
+        </select><br><br>
+
+        <label for="used_pin_number">Used PIN number:</label>
+        <select name="used_pin_number" id="used_pin_number">
+            <option value="0">No</option>
+            <option value="1">Yes</option>
+        </select><br><br>
+
+        <label for="online_order">Online order:</label>
+        <select name="online_order" id="online_order">
+            <option value="0">No</option>
+            <option value="1">Yes</option>
+        </select><br><br>
+
+        <input type="submit" value="Predict"><br><br>
+
+        {% if prediction_text %}
+        <h2>{{ prediction_text }}</h2>
+        {% endif %}
+    </form>
+</body>
+</html>
