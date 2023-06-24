@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Credit Card Fraud Detection</title>
+    <title>Credit Card Fraud Detection System</title>
     <style>
         body {
-            background-image: url("https://live.staticflickr.com/65535/52861861489_8a5ebb208b_z.jpg");
+            background-image: url("https://live.staticflickr.com/65535/52907302297_2619e3a148_z.jpg");
             background-repeat: no-repeat;
             background-size: cover;
             background-position: center;
@@ -24,15 +24,30 @@
         input[type="text"], select {
             font-size: 1.2em;
             padding: 10px;
+            color: black; /* set font color to black */
+        }
+
+        /* Change color of the "Generate Transaction" button to black */
+        input[type="submit"] {
+            color: black;
+        }
+
+        /* Add a style for the prediction text */
+        #prediction_text {
+            margin-top: 20px;
         }
     </style>
 </head>
 <body>
     <h1>Credit Card Fraud Detection</h1>
-    <form action="{{ url_for('predict') }}" method="post">
+
+    <!-- Form to input synthetic transaction data -->
+    <form action="/predict" method="post">
+        <!-- Include input fields for the synthetic transaction data -->
         <label for="distance_from_home">Distance from home:</label>
         <input type="text" name="distance_from_home" id="distance_from_home"><br><br>
 
+        <!-- Add other input fields here -->
         <label for="distance_from_last_transaction">Distance from last transaction:</label>
         <input type="text" name="distance_from_last_transaction" id="distance_from_last_transaction"><br><br>
 
@@ -63,11 +78,11 @@
             <option value="1">Yes</option>
         </select><br><br>
 
-        <input type="submit" value="Predict"><br><br>
-
-        {% if prediction_text %}
-        <h2>{{ prediction_text }}</h2>
-        {% endif %}
+        <input type="submit" value="Generate Transaction">
     </form>
+
+    <!-- Display prediction -->
+    <h2 id="prediction_text">{{ prediction_text }}</h2>
 </body>
 </html>
+
