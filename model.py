@@ -2,6 +2,7 @@ import pandas as pd
 import numpy as np
 from sklearn.model_selection import train_test_split
 from lightgbm import LGBMClassifier
+from imblearn.over_sampling import SMOTE
 import pickle
 
 df = pd.read_csv("credit card fraud data.csv")
@@ -9,10 +10,10 @@ df = pd.read_csv("credit card fraud data.csv")
 # Get all the columns from the dataframe
 columns = df.columns.tolist()
 
-# Filter the columns to remove data we do not want 
+# Filter the columns to remove data we do not want
 columns = [c for c in columns if c not in ["fraud", "state", "category"]]
 
-# Store the variable we are predicting 
+# Store the variable we are predicting
 target = "fraud"
 
 # Convert the categorical columns to numerical columns
@@ -22,7 +23,11 @@ df["category"] = pd.factorize(df["category"])[0]
 X = df[columns]
 y = df[target]
 
-model = LGBMClassifier(n_estimators=2000, 
+# Balance the dataset using SMOTE
+smote = SMOTE()
+X, y = smote.fit_resample(X, y)
+
+model = LGBMClassifier(n_estimators=2000,
                        learning_rate=0.01,
                        num_leaves=80,
                        colsample_bytree=0.98,
