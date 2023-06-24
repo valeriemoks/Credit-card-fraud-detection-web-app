@@ -1,5 +1,8 @@
 import pickle
+from model import model
+# Assuming `model` is the trained model object
 
-# `model` is the trained model you want to save
+# Save the model as a pickle file
 with open('model.pkl', 'wb') as f:
     pickle.dump(model, f)
+
