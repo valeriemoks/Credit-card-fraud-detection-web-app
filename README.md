@@ -8,6 +8,9 @@ pip install -r requirements.txt
 Once the libraries are installed, you can run the web application by executing:
 python app.py
 
+## Deployment
+Use this start up command for deployment: `gunicorn -b 0.0.0.0:5000 app:app`
+
 # Usage
 To use the application, simply fill out the form on the web page with the required information and click "Predict". The application will then display the predicted result of whether the transaction is fraudulent or not.
 
